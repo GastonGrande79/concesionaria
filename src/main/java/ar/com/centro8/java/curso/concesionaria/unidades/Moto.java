@@ -1,6 +1,9 @@
 
-package ar.com.centro8.java.curso.concesionaria.modelo;
+package ar.com.centro8.java.curso.concesionaria.unidades;
 
+import lombok.Getter;
+
+@Getter
 public class Moto extends Vehiculo {
 
     private int cilindrada;
@@ -13,14 +16,11 @@ public class Moto extends Vehiculo {
     }
 
     @Override
-    public String obtenerDescripcion() {
+    public String toString() {
 
         return "Marca: " + getMarca()
                 + " // Modelo: " + getModelo()
                 + " // Cilindrada: " + cilindrada + "c"
-                + " // Precio: $" + formatearPrecio();
+                + " // Precio: " + formatearPrecio();
     }
-
-    
 }
-

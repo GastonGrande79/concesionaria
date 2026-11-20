@@ -1,6 +1,9 @@
 
-package ar.com.centro8.java.curso.concesionaria.modelo;
+package ar.com.centro8.java.curso.concesionaria.unidades;
 
+import lombok.Getter;
+
+@Getter
 public class Auto extends Vehiculo {
 
     private int cantidadPuertas;
@@ -13,15 +16,13 @@ public class Auto extends Vehiculo {
     }
 
     @Override
-    public String obtenerDescripcion() {
+    public String toString() {
 
         return "Marca: " + getMarca()
                 + " // Modelo: " + getModelo()
                 + " // Puertas: " + cantidadPuertas
-                + " // Precio: $" + formatearPrecio();
+                + " // Precio: " + formatearPrecio();
     }
-
-    
 }
 
 
