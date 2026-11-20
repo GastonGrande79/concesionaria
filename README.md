@@ -2,67 +2,71 @@
 
 ## Descripción del proyecto
 
-Este proyecto consiste en el desarrollo de una aplicación de consola en Java que simula el funcionamiento básico de una concesionaria de automóviles y motocicletas.
+Aplicación desarrollada en Java que simula el funcionamiento básico de una concesionaria de automóviles y motocicletas.
 
-Fue realizado como parte de la **Segunda Actividad Entregable Obligatoria** del curso de Programación Orientada a Objetos (POO).
+El proyecto corresponde a la Segunda Actividad Entregable Obligatoria del curso de Programación Orientada a Objetos (POO).
 
-La aplicación permite cargar una colección de vehículos y realizar diferentes operaciones sobre ellos, mostrando los resultados por consola sin solicitar datos al usuario.
+La aplicación permite cargar vehículos, mostrar sus características, identificar los de mayor y menor precio, buscar modelos que contengan una letra determinada y ordenar la colección según diferentes criterios.
 
 ## Objetivos
 
-Aplicar los conceptos fundamentales de la programación orientada a objetos y utilizar herramientas del ecosistema Java para trabajar con colecciones de objetos.
+Aplicar los principales conceptos de la Programación Orientada a Objetos:
 
-Entre los objetivos principales se encuentran:
-
-- Implementar herencia y abstracción.
-- Utilizar interfaces.
-- Aplicar polimorfismo.
-- Trabajar con colecciones mediante Java Collections Framework.
-- Utilizar la API Stream para procesar y filtrar información.
-- Implementar la interfaz `Comparable` para establecer un orden natural.
-- Sobrescribir métodos como `toString()`.
-- Utilizar Lombok para reducir código repetitivo.
-- Desarrollar y ejecutar el proyecto utilizando Spring Boot y Maven.
+- Abstracción.
+- Encapsulamiento.
+- Herencia.
+- Polimorfismo.
+- Interfaces.
+- Sobrescritura de métodos.
+- Colecciones de objetos.
+- Ordenamiento natural y personalizado.
+- Uso de Stream API.
 
 ## Tecnologías utilizadas
 
-| Tecnología | Aplicación |
+| Tecnología | Utilización |
 |---|---|
 | Java 25 | Lenguaje de programación |
-| Spring Boot 4.1.2 | Framework de desarrollo |
-| Maven | Gestión del proyecto y dependencias |
-| Lombok | Reducción de código repetitivo |
-| Collections Framework | Administración de colecciones |
-| Stream API | Procesamiento de datos |
-| Comparable | Ordenamiento natural de vehículos |
-| Git y GitHub | Control de versiones y alojamiento del código |
+| Spring Boot 4.1.2 | Estructura y configuración del proyecto |
+| Maven | Gestión de dependencias |
+| Lombok | Generación automática de métodos |
+| Java Collections Framework | Administración de vehículos |
+| Stream API | Búsquedas y ordenamientos |
+| Git / GitHub | Control de versiones |
 
 ## Estructura del proyecto
-
-El proyecto está organizado en paquetes para separar las responsabilidades de cada componente.
 
 ```text
 concesionaria/
 │
 ├── src/
 │   ├── main/
-│   │   └── java/
-│   │       └── ar/com/centro8/java/curso/concesionaria/
-│   │           │
-│   │           ├── TestConcesionaria.java
-│   │           │
-│   │           ├── interfaces/
-│   │           │   └── Imprimible.java
-│   │           │
-│   │           ├── modelo/
-│   │           │   ├── Vehiculo.java
-│   │           │   ├── Auto.java
-│   │           │   └── Moto.java
-│   │           │
-│   │           └── servicio/
-│   │               └── Concesionaria.java
+│   │   ├── java/
+│   │   │   └── ar/com/centro8/java/curso/concesionaria/
+│   │   │       │
+│   │   │       ├── ConcesionariaApplication.java
+│   │   │       │
+│   │   │       ├── implementacion/
+│   │   │       │   └── Concesionaria.java
+│   │   │       │
+│   │   │       ├── interfaz/
+│   │   │       │   └── IConcesionaria.java
+│   │   │       │
+│   │   │       ├── unidades/
+│   │   │       │   ├── Vehiculo.java
+│   │   │       │   ├── Auto.java
+│   │   │       │   └── Moto.java
+│   │   │       │
+│   │   │       └── test/
+│   │   │           └── TestConcesionaria.java
+│   │   │
+│   │   └── resources/
+│   │       └── application.properties
 │   │
 │   └── test/
+│       └── java/
+│           └── ar/com/centro8/java/curso/concesionaria/
+│               └── ConcesionariaApplicationTests.java
 │
 ├── .mvn/
 ├── mvnw
@@ -71,101 +75,146 @@ concesionaria/
 └── README.md
 ```
 
-### Descripción de las clases
+## Descripción de las clases e interfaces
 
-**Vehiculo (clase abstracta)**
+### Vehiculo (clase abstracta)
 
-Es la clase base del modelo. Contiene los atributos comunes a todos los vehículos: marca, modelo y precio.
+Es la clase base de todos los vehículos.
 
-Implementa la interfaz `Comparable<Vehiculo>` para establecer el orden natural por marca, modelo y precio.
+Contiene los atributos comunes:
 
-**Auto**
+- marca
+- modelo
+- precio
 
-Hereda de `Vehiculo` y agrega el atributo cantidad de puertas.
+Implementa la interfaz `Comparable<Vehiculo>`, estableciendo el orden natural de los vehículos mediante el método `compareTo()`.
 
-**Moto**
+El criterio de comparación es:
 
-Hereda de `Vehiculo` y agrega el atributo cilindrada.
+1. Marca.
+2. Modelo.
+3. Precio.
 
-**Imprimible (interfaz)**
+También contiene el método `formatearPrecio()`, que utiliza `DecimalFormat` para representar los importes monetarios.
 
-Define el método `obtenerDescripcion()`, que permite obtener la descripción de cada vehículo.
+Utiliza las anotaciones Lombok `@Getter` y `@AllArgsConstructor`.
 
-**Concesionaria**
+### Auto
 
-Es la clase encargada de cargar los vehículos y centralizar las operaciones realizadas sobre la colección.
+Hereda de la clase abstracta `Vehiculo`.
 
-**TestConcesionaria**
+Agrega el atributo específico:
 
-Es la clase principal de ejecución de la aplicación. Utiliza Spring Boot y `CommandLineRunner` para ejecutar las operaciones automáticamente al iniciar el programa.
+- cantidadPuertas.
 
-## Funcionalidades
+Sobrescribe el método `toString()` para representar la información del automóvil, incluyendo marca, modelo, cantidad de puertas y precio.
 
-Al ejecutar la aplicación se realizan las siguientes operaciones:
+Utiliza Lombok mediante la anotación `@Getter`.
 
-1. Carga de vehículos en una única colección.
-2. Impresión de la descripción de cada vehículo.
-3. Identificación del vehículo de mayor precio.
-4. Identificación del vehículo de menor precio.
-5. Búsqueda de vehículos cuyo modelo contiene la letra Y.
-6. Ordenamiento de vehículos por precio de mayor a menor.
-7. Ordenamiento natural por marca, modelo y precio.
+### Moto
 
-Los vehículos utilizados para las pruebas son:
+Hereda de la clase abstracta `Vehiculo`.
 
-- Peugeot 206 – Auto – 4 puertas.
-- Honda Titan – Moto – 125 cc.
-- Peugeot 208 – Auto – 5 puertas.
-- Yamaha YBR – Moto – 160 cc.
+Agrega el atributo específico:
 
-## Ejecución del proyecto
+- cilindrada.
 
-### Requisitos previos
+Sobrescribe el método `toString()` para representar la información de la motocicleta, incluyendo marca, modelo, cilindrada y precio.
 
-- Tener instalado Java JDK 25.
-- Contar con un entorno de desarrollo compatible con Java, como Visual Studio Code, IntelliJ IDEA o Eclipse.
+Utiliza Lombok mediante la anotación `@Getter`.
 
-### Clonar el repositorio
+### IConcesionaria (interfaz)
 
-Desde una terminal ejecutar:
+Define el contrato que debe implementar la clase encargada de gestionar las operaciones de la concesionaria.
 
-```bash
-git clone https://github.com/GastonGrande79/concesionaria.git
-```
+Declara el método:
 
-Ingresar a la carpeta del proyecto:
+`void ejecutar();`
 
-```bash
-cd concesionaria
-```
+### Concesionaria (clase de implementación)
 
-### Ejecutar con Maven Wrapper
+Implementa la interfaz `IConcesionaria`.
 
-En Windows:
+Es responsable de:
 
-```bash
-mvnw.cmd spring-boot:run
-```
+- Cargar los vehículos en una colección `List<Vehiculo>`.
+- Ejecutar las operaciones de búsqueda.
+- Identificar el vehículo más caro.
+- Identificar el vehículo más barato.
+- Buscar modelos que contienen la letra Y.
+- Ordenar los vehículos por precio descendente.
+- Ordenar los vehículos según su orden natural.
 
-En Linux o macOS:
+Utiliza `ArrayList`, `Stream API`, `Comparator` y `Collections.sort()`.
 
-```bash
-./mvnw spring-boot:run
-```
+### TestConcesionaria
 
-También se puede importar el proyecto desde un IDE y ejecutar la clase `TestConcesionaria`.
+Es la clase de prueba que contiene el método `main()`.
+
+Crea una instancia de `Concesionaria` y llama al método `ejecutar()` para iniciar las operaciones y mostrar los resultados por consola.
+
+### ConcesionariaApplication
+
+Es la clase principal de Spring Boot.
+
+Contiene el método `main()` que inicia la aplicación mediante `SpringApplication.run()`.
+
+## Vehículos cargados
+
+La aplicación trabaja con los siguientes vehículos:
+
+| Marca | Modelo | Tipo | Característica | Precio |
+|---|---|---|---|---:|
+| Peugeot | 206 | Automóvil | 4 puertas | $200.000,00 |
+| Honda | Titan | Motocicleta | 125 c | $60.000,00 |
+| Peugeot | 208 | Automóvil | 5 puertas | $250.000,00 |
+| Yamaha | YBR | Motocicleta | 160 c | $80.500,50 |
+
+## Funcionalidades implementadas
+
+### 1. Listado de vehículos
+
+Muestra todos los vehículos cargados, utilizando `toString()` para obtener la descripción de cada objeto.
+
+### 2. Vehículo de mayor precio
+
+Utiliza Stream API y `max()` junto con `Comparator.comparingDouble()` para identificar el vehículo más caro.
+
+### 3. Vehículo de menor precio
+
+Utiliza Stream API y `min()` para identificar el vehículo de menor valor.
+
+### 4. Búsqueda por letra Y
+
+Utiliza `filter()` para encontrar los vehículos cuyo modelo contiene la letra Y, sin distinguir entre mayúsculas y minúsculas.
+
+### 5. Ordenamiento por precio descendente
+
+Utiliza `sorted()` y `Comparator.comparingDouble().reversed()` para ordenar los vehículos desde el precio más alto hasta el más bajo.
+
+### 6. Ordenamiento natural
+
+Utiliza `Collections.sort()` para ordenar la colección según el criterio definido en el método `compareTo()` de la clase `Vehiculo`.
+
+El orden establecido es marca, modelo y precio.
 
 ## Resultado esperado
 
-La aplicación muestra por consola el listado de vehículos, los resultados de las búsquedas y los diferentes criterios de ordenamiento, respetando el formato solicitado en la consigna.
+Al ejecutar el programa se muestran:
 
-No requiere ingreso de datos por teclado y finaliza automáticamente una vez completadas las operaciones.
+- Los cuatro vehículos cargados.
+- El vehículo de mayor precio.
+- El vehículo de menor precio.
+- El vehículo cuyo modelo contiene la letra Y.
+- El listado ordenado por precio descendente.
+- El listado ordenado naturalmente por marca, modelo y precio.
 
-## Autor
 
-**Gaston Grande**
+Actividad académica – Programación Orientada a Objetos (Java).
 
-Proyecto académico – Programación Orientada a Objetos (Java).
+Repositorio GitHub:
+
+https://github.com/GastonGrande79/concesionaria
 
 
 
