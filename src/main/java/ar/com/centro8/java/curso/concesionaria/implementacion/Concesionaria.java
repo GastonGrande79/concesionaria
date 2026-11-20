@@ -2,10 +2,8 @@
 package ar.com.centro8.java.curso.concesionaria.implementacion;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 import ar.com.centro8.java.curso.concesionaria.interfaz.IConcesionaria;
 import ar.com.centro8.java.curso.concesionaria.unidades.Auto;
@@ -68,7 +66,7 @@ public class Concesionaria implements IConcesionaria {
     // Busca e imprime los vehículos cuyo modelo contiene la letra Y.
     private void mostrarConLetraY(List<Vehiculo> vehiculos) {
         vehiculos.stream()
-                .filter(v -> v.getModelo().toUpperCase(Locale.ROOT).contains("Y"))
+                .filter(v -> v.getModelo().toUpperCase().contains("Y"))
                 .forEach(v -> System.out.println(
                         "Vehículo que contiene en el modelo la letra ´Y´: "
                                 + v.getMarca() + " " + v.getModelo()
@@ -88,7 +86,6 @@ public class Concesionaria implements IConcesionaria {
     private void mostrarOrdenadosNaturalmente(List<Vehiculo> vehiculos) {
         System.out.println("Vehículos ordenados por orden natural (marca, modelo, precio):");
 
-        Collections.sort(vehiculos);
         vehiculos.forEach(System.out::println);
     }
 }
