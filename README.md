@@ -166,9 +166,9 @@ La aplicación trabaja con los siguientes vehículos:
 | Marca | Modelo | Tipo | Característica | Precio |
 |---|---|---|---|---:|
 | Peugeot | 206 | Automóvil | 4 puertas | $200.000,00 |
-| Honda | Titan | Motocicleta | 125 cc | $60.000,00 |
+| Honda | Titan | Motocicleta | 125 c | $60.000,00 |
 | Peugeot | 208 | Automóvil | 5 puertas | $250.000,00 |
-| Yamaha | YBR | Motocicleta | 160 cc | $80.500,50 |
+| Yamaha | YBR | Motocicleta | 160 c | $80.500,50 |
 
 ## Funcionalidades implementadas
 
